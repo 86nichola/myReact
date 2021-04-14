@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 import Hello from './Hello.js';
+import Wrapper from './Wrapper'
+import Counter from './Counter'
+import InputSample from './InputSample'
 
 function App() {
   const name = 'react';
@@ -12,8 +15,13 @@ function App() {
   }
   return (
     <>
-      <Hello name="react" color="red" />
-      <Hello color="pink" />
+      <Wrapper>
+        <Hello name="react" color="red" isSpecial />
+        <Hello color="pink" />
+        <Counter />
+        <InputSample />
+      </Wrapper>
+        
     </>
   );
 }
