@@ -1,18 +1,13 @@
-import React from 'react'
+import React from "react";
 
 function Wrapper({ children }) {
-    const style = {
-        border: '2px solid black',
-        padding: '16px'
-    };
+  const style = {
+    border: "2px solid orange",
+    padding: "26px",
+    margin: "30px",
+  };
 
-    return (
-        <div style={style}>
-            {children}
-        </div>
-
-    )
-
+  return <div style={style}>{children}</div>;
 }
 
-export default Wrapper
+export default Wrapper;
