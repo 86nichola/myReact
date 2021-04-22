@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import DefaultUsers from "./DefaultUsers";
 import Wrapper from "./Wrapper";
 
 function User({ user }) {
@@ -9,13 +10,20 @@ function User({ user }) {
   );
 }
 
-function UserList({ users }) {
+function UserList({ users, onDefault }) {
   return (
     <>
+      <div style={{ border: "2px solid green", padding: "3px" }}>
+        <DefaultUsers onDefault={onDefault} />
+      </div>
+
+      <p />
       {users.map((user) => {
         return (
           <>
-            <User user={user} key={user.id} />
+            <div style={{ border: "2px solid gray", padding: "3px" }}>
+              <User user={user} key={user.id} />
+            </div>
           </>
         );
       })}

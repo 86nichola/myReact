@@ -20,7 +20,7 @@ function App() {
     email: "",
   });
   const { username, email } = inputs;
-  const [users, setUsers] = useState([
+  const defaultUsers = [
     {
       id: 1,
       username: "velopert",
@@ -36,7 +36,8 @@ function App() {
       username: "liz",
       email: "liz@example.com",
     },
-  ]);
+  ];
+  const [users, setUsers] = useState(defaultUsers);
   const nextId = useRef("4");
   const onCreate = () => {
     const user = {
@@ -52,6 +53,15 @@ function App() {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
+  const onDestroy = () => {
+    users.pop();
+    setUsers([...users]);
+  };
+  const onDefault = () => {
+    debugger;
+    setUsers([...defaultUsers]);
+  };
+
   return (
     <>
       <Hello name="react" color="red" isSpecial />
@@ -59,16 +69,17 @@ function App() {
       <Counter />
       <br />
       <InputSample />
-      <Wrapper>
+      <Wrapper bordercolor="red">
         <CreateUser
           username={username}
           email={email}
           onChange={onChange}
           onCreate={onCreate}
+          onDestroy={onDestroy}
         />
       </Wrapper>
       <Wrapper>
-        <UserList users={users} />
+        <UserList users={users} onDefault={onDefault} />
       </Wrapper>
     </>
   );
