@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import DefaultUsers from "./DefaultUsers";
 import Wrapper from "./Wrapper";
 
-function User({ user }) {
+function User({ user, onRemove }) {
   return (
     <div>
-      <b>{user.username}</b> ({user.email})
+      <b style={{ cursor: "pointer", color: user.active ? "green" : "black" }}>
+        {user.username}
+      </b>
+      ({user.email})<button onClick={() => onRemove(user.id)}>del</button>
     </div>
   );
 }
 
-function UserList({ users, onDefault }) {
+function UserList({ users, onDefault, onRemove }) {
   return (
     <>
       <div style={{ border: "2px solid green", padding: "3px" }}>
@@ -23,7 +26,12 @@ function UserList({ users, onDefault }) {
           <>
             <div style={{ padding: "3px" }}>
               <div style={{ border: "2px solid gray", padding: "13px" }}>
-                <User user={user} key={user.id} />
+                <User
+                  user={user}
+                  key={user.id}
+                  onRemove={onRemove}
+                  onToggle={onToggle}
+                />
               </div>
             </div>
           </>

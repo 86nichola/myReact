@@ -25,16 +25,19 @@ function App() {
       id: 1,
       username: "velopert",
       email: "public.velopert@gmail.com",
+      active: true,
     },
     {
       id: 2,
       username: "tester",
       email: "tester@example.com",
+      active: false,
     },
     {
       id: 3,
       username: "liz",
       email: "liz@example.com",
+      active: true,
     },
   ];
   const [users, setUsers] = useState(defaultUsers);
@@ -61,7 +64,20 @@ function App() {
     debugger;
     setUsers([...defaultUsers]);
   };
-
+  const onRemove = (id) => {
+    setUsers(
+      users.filter((o) => {
+        return o.id !== id;
+      })
+    );
+  };
+  const onToggle = (id) => {
+    setUsers(
+      users.map((user) =>
+        user.id === id ? { ...user, active: !user.active } : user
+      )
+    );
+  };
   return (
     <>
       <div style={{ display: "inline-block" }}>
@@ -82,7 +98,7 @@ function App() {
           />
         </Wrapper>
         <Wrapper>
-          <UserList users={users} onDefault={onDefault} />
+          <UserList users={users} onDefault={onDefault} onRemove={onRemove} />
         </Wrapper>
       </div>
     </>
