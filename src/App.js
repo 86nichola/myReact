@@ -64,23 +64,27 @@ function App() {
 
   return (
     <>
-      <Hello name="react" color="red" isSpecial />
-      <Hello color="pink" />
-      <Counter />
-      <br />
-      <InputSample />
-      <Wrapper bordercolor="red">
-        <CreateUser
-          username={username}
-          email={email}
-          onChange={onChange}
-          onCreate={onCreate}
-          onDestroy={onDestroy}
-        />
-      </Wrapper>
-      <Wrapper>
-        <UserList users={users} onDefault={onDefault} />
-      </Wrapper>
+      <div style={{ display: "inline-block" }}>
+        <Wrapper bordercolor="red">
+          <Hello name="react" color="red" isSpecial />
+          <Hello color="pink" />
+          <Counter />
+          <br />
+          <InputSample />
+        </Wrapper>
+        <Wrapper bordercolor="red">
+          <CreateUser
+            username={username}
+            email={email}
+            onChange={onChange}
+            onCreate={onCreate}
+            onDestroy={onDestroy}
+          />
+        </Wrapper>
+        <Wrapper>
+          <UserList users={users} onDefault={onDefault} />
+        </Wrapper>
+      </div>
     </>
   );
 }

@@ -21,8 +21,10 @@ function UserList({ users, onDefault }) {
       {users.map((user) => {
         return (
           <>
-            <div style={{ border: "2px solid gray", padding: "3px" }}>
-              <User user={user} key={user.id} />
+            <div style={{ padding: "3px" }}>
+              <div style={{ border: "2px solid gray", padding: "13px" }}>
+                <User user={user} key={user.id} />
+              </div>
             </div>
           </>
         );
