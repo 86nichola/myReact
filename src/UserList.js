@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import DefaultUsers from "./DefaultUsers";
 import Wrapper from "./Wrapper";
 
-function User({ user, onRemove }) {
+function User({ user, onRemove, onToggle }) {
   return (
     <div>
-      <b style={{ cursor: "pointer", color: user.active ? "green" : "black" }}>
+      <b
+        style={{ cursor: "pointer", color: user.active ? "green" : "black" }}
+        onClick={() => onToggle(user.id)}
+      >
         {user.username}
       </b>
       ({user.email})<button onClick={() => onRemove(user.id)}>del</button>
@@ -13,7 +16,7 @@ function User({ user, onRemove }) {
   );
 }
 
-function UserList({ users, onDefault, onRemove }) {
+function UserList({ users, onDefault, onRemove, onToggle }) {
   return (
     <>
       <div style={{ border: "2px solid green", padding: "3px" }}>

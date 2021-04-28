@@ -37,7 +37,7 @@ function App() {
       id: 3,
       username: "liz",
       email: "liz@example.com",
-      active: true,
+      active: false,
     },
   ];
   const [users, setUsers] = useState(defaultUsers);
@@ -80,27 +80,30 @@ function App() {
   };
   return (
     <>
-      <div style={{ display: "inline-block" }}>
-        <Wrapper bordercolor="red">
-          <Hello name="react" color="red" isSpecial />
-          <Hello color="pink" />
-          <Counter />
-          <br />
-          <InputSample />
-        </Wrapper>
-        <Wrapper bordercolor="red">
-          <CreateUser
-            username={username}
-            email={email}
-            onChange={onChange}
-            onCreate={onCreate}
-            onDestroy={onDestroy}
-          />
-        </Wrapper>
-        <Wrapper>
-          <UserList users={users} onDefault={onDefault} onRemove={onRemove} />
-        </Wrapper>
+      <div>
+        <Hello name="react" color="red" isSpecial />
+        <Hello color="pink" />
+        <Counter />
+        <br />
+        <InputSample />
       </div>
+      <Wrapper bordercolor="red">
+        <CreateUser
+          username={username}
+          email={email}
+          onChange={onChange}
+          onCreate={onCreate}
+          onDestroy={onDestroy}
+        />
+      </Wrapper>
+      <Wrapper>
+        <UserList
+          users={users}
+          onDefault={onDefault}
+          onRemove={onRemove}
+          onToggle={onToggle}
+        />
+      </Wrapper>
     </>
   );
 }
