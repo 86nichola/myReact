@@ -1,26 +1,21 @@
-import React, { useState, useRef } from "react";
-import "./App.css";
-import Hello from "./Hello.js";
-import Wrapper from "./Wrapper";
-import Counter from "./Counter";
-import InputSample from "./InputSample";
+import React, { useRef, useState } from "react";
 import UserList from "./UserList";
 import CreateUser from "./CreateUser";
 
 function App() {
-  const name = "react";
-  const style = {
-    backgroundColor: "red",
-    color: "aqua",
-    fontSize: "24",
-    padding: "1rem",
-  };
   const [inputs, setInputs] = useState({
     username: "",
     email: "",
   });
   const { username, email } = inputs;
-  const defaultUsers = [
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+  const [users, setUsers] = useState([
     {
       id: 1,
       username: "velopert",
@@ -39,37 +34,28 @@ function App() {
       email: "liz@example.com",
       active: false,
     },
-  ];
-  const [users, setUsers] = useState(defaultUsers);
-  const nextId = useRef("4");
+  ]);
+
+  const nextId = useRef(4);
   const onCreate = () => {
     const user = {
       id: nextId.current,
       username,
       email,
     };
-    setUsers([...users, user]);
-    setInputs({ username: "", email: "" });
+    setUsers(users.concat(user));
+
+    setInputs({
+      username: "",
+      email: "",
+    });
     nextId.current += 1;
   };
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setInputs({ ...inputs, [name]: value });
-  };
-  const onDestroy = () => {
-    users.pop();
-    setUsers([...users]);
-  };
-  const onDefault = () => {
-    debugger;
-    setUsers([...defaultUsers]);
-  };
+
   const onRemove = (id) => {
-    setUsers(
-      users.filter((o) => {
-        return o.id !== id;
-      })
-    );
+    // user.id 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
+    // = user.id 가 id 인 것을 제거함
+    setUsers(users.filter((user) => user.id !== id));
   };
   const onToggle = (id) => {
     setUsers(
@@ -80,30 +66,13 @@ function App() {
   };
   return (
     <>
-      <div>
-        <Hello name="react" color="red" isSpecial />
-        <Hello color="pink" />
-        <Counter />
-        <br />
-        <InputSample />
-      </div>
-      <Wrapper bordercolor="red">
-        <CreateUser
-          username={username}
-          email={email}
-          onChange={onChange}
-          onCreate={onCreate}
-          onDestroy={onDestroy}
-        />
-      </Wrapper>
-      <Wrapper>
-        <UserList
-          users={users}
-          onDefault={onDefault}
-          onRemove={onRemove}
-          onToggle={onToggle}
-        />
-      </Wrapper>
+      <CreateUser
+        username={username}
+        email={email}
+        onChange={onChange}
+        onCreate={onCreate}
+      />
+      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
     </>
   );
 }
